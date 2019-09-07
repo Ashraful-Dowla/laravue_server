@@ -22,8 +22,8 @@ class CreateBillIssuedsTable extends Migration
             $table->date('issued_date');
             $table->string('status');
             $table->timestamps();
-            $table->timestamp('created_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
+            $table->string('created_by')->references('id')->on('users');
+            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

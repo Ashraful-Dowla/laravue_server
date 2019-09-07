@@ -23,8 +23,8 @@ class CreateDoctorSchedulesTable extends Migration
             $table->time('time_to');
             $table->binary('status');
             $table->timestamps();
-            $table->timestamp('created_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
+            $table->string('created_by')->references('id')->on('users');
+            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

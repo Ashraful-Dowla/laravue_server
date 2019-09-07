@@ -20,12 +20,12 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('patient_id')->references('patient_id')->on('users');
             $table->foreign('doctor_id')->references('doctor_id')->on('users');
             $table->string('department');
-            $table->date('date');
+            $table->date('appointment_date');
             $table->binary('status');
             $table->time('time');
             $table->timestamps();
-            $table->timestamp('created_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
+            $table->string('created_by')->references('id')->on('users');
+            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

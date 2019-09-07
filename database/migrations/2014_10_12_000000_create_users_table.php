@@ -43,8 +43,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->timestamp('craeted_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
+            $table->string('created_by')->references('id')->on('users');
+            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

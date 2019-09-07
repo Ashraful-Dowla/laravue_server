@@ -18,8 +18,8 @@ class CreateTestManagementsTable extends Migration
             $table->string('title');
             $table->string('price');
             $table->timestamps();
-            $table->timestamp('created_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
+            $table->string('created_by')->references('id')->on('users');
+            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

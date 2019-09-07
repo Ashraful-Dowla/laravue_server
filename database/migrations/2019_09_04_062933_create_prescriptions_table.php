@@ -20,10 +20,10 @@ class CreatePrescriptionsTable extends Migration
             $table->foreign('patient_id')->references('patient_id')->on('users');
             $table->foreign('doctor_id')->references('doctor_id')->on('users');
             $table->string('prescription');
-            $table->date('date');
+            $table->date('prescription_date');
             $table->timestamps();
-            $table->timestamp('created_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
+            $table->string('created_by')->references('id')->on('users');
+            $table->string('updated_by')->references('id')->on('users');
         });
     }
 
