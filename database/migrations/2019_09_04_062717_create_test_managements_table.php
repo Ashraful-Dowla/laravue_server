@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
 class CreateTestManagementsTable extends Migration
 {
     /**
@@ -18,6 +19,7 @@ class CreateTestManagementsTable extends Migration
             $table->string('title');
             $table->string('price');
             $table->timestamps();
+            $table->string('slug_title');
             $table->string('created_by')->references('id')->on('users');
             $table->string('updated_by')->references('id')->on('users');
         });
