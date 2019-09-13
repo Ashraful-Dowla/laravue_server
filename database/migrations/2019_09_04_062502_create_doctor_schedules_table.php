@@ -16,7 +16,6 @@ class CreateDoctorSchedulesTable extends Migration
         Schema::create('doctor_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('doctor_id');
-            $table->foreign('doctor_id')->references('doctor_id')->on('users');
             $table->string('department');
             $table->string('available_days');
             $table->time('time_from');

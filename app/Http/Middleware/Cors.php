@@ -15,7 +15,7 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        $domain = ['http://localhost:26706'];
+        $domain = ['http://localhost:8081','https://laravueproject.firebaseapp.com'];
         if(isset($request->server()['HTTP_ORIGIN'])){
             $origin = $request->server()['HTTP_ORIGIN'];
             if(in_array($origin, $domain)){

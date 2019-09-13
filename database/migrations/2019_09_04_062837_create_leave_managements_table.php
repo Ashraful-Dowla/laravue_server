@@ -18,7 +18,6 @@ class CreateLeaveManagementsTable extends Migration
             $table->string('request_type');
             $table->string('department_name');
             $table->string('doctor_id');
-            $table->foreign('doctor_id')->references('doctor_id')->on('users');
             $table->date('date_from');
             $table->date('date_to');
             $table->integer('number_of_days');

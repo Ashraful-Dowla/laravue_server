@@ -17,7 +17,6 @@ class CreateBillIssuedsTable extends Migration
             $table->bigIncrements('id');
             $table->string('invoice_id');
             $table->string('patient_id');
-            $table->foreign('patient_id')->references('patient_id')->on('users');
             $table->string('amount');
             $table->date('issued_date');
             $table->string('status');

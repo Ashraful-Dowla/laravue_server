@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
         	[
             'first_name' => 'Ajmal',
             'last_name' => 'Hossain',
-            'email' => 'ajmalhossainopu12@gmail.com',
-            'password' => bcrypt('patient'),
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
             'username' => 'ajmal123',
             'joining_date' => '2019-08-20',
             'birthday' => '2019-08-20',
@@ -35,11 +35,11 @@ class UsersTableSeeder extends Seeder
             'department' => 'Cadiology',
             'short_biography' => 'Ajmal Hossain Opu. adjhd',
             'status' => '1',
-            'doctor_id' => 'DR-4',
-            'patient_id' => 'PT-4',
-            'receptionist_id' => 'RC-4',
-            'admin_id' => 'AD-4',
-            'role' => '4',
+            'doctor_id' => 'DR-3',
+            'patient_id' => 'PT-3',
+            'receptionist_id' => 'RC-3',
+            'admin_id' => 'AD-3',
+            'role' => '1',
             'created_by' => '',
             'updated_by' => ''
         	]

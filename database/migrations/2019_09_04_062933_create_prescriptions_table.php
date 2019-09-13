@@ -17,8 +17,6 @@ class CreatePrescriptionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('patient_id');
             $table->string('doctor_id');
-            $table->foreign('patient_id')->references('patient_id')->on('users');
-            $table->foreign('doctor_id')->references('doctor_id')->on('users');
             $table->string('prescription');
             $table->date('prescription_date');
             $table->timestamps();
