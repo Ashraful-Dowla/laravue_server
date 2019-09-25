@@ -21,10 +21,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /*============================Admin======================================*/
 
-Route::post('test_management','ApiTestManagement@insert_test_data');
-Route::get('get_test_management_data','ApiTestManagement@get_test_data');
-Route::post('delete_test_management_data','ApiTestManagement@delete_data');
-Route::post('update_test_management_data','ApiTestManagement@update_data');
+Route::post('testManagement','ApiTestManagement@insertTestData');
+Route::get('getTestManagementData','ApiTestManagement@getTestData');
+Route::post('deleteTestManagementData','ApiTestManagement@deleteData');
+Route::post('updateTestManagementData','ApiTestManagement@updateData');
+//Route::get('filter','ApiTestManagement@filterData');
+
+Route::post('addDepartments','Department@addDepartments');
+Route::get('getDepartmentData','Department@getDepartmentData');
+Route::post('updateDepartmentData','Department@updateData');
+Route::post('deleteDepartmentData','Department@deleteData');
+
 
 /*=======================================================================*/
 
@@ -46,7 +53,17 @@ Route::post('update_test_management_data','ApiTestManagement@update_data');
 
 /*============================Receptionist================================*/
 
+Route::get('getTestData','TestIssue@getdata');
+Route::post('testIssuedData','TestIssue@insetTestIssueData');
 
+Route::get('getBillIssuedData/{id}','ReceptionistBillIssued@getData');
+Route::post('deleteBillIssuedData','ReceptionistBillIssued@deleteData');
+
+Route::post('getOrdersData','ReceptionistOrders@getData');
+
+Route::get('getDataUpdateTestIssue/{id}', 'ReceptionistUpdateTestIssue@getData');
+
+Route::post('UpdateTestIssue', 'ReceptionistUpdateTestIssue@updateData');
 /*========================================================================*/
 
 
