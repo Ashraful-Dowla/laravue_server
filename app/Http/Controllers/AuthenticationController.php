@@ -13,8 +13,8 @@ use Illuminate\Support\Str;
 class AuthenticationController extends Controller
 {
     public function patientAdmission(patient_registration $request){
-    	$validated = $request->validated();
 
+    	$validated = $request->validated();
     	$firstName = $request ->firstName;
 		$lastName = $request ->lastName;
 		$email = $request ->email;
