@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 
 class AuthenticationController extends Controller
 {
+	
     public function patientAdmission(Request $request){
     	$firstName = $request ->firstName;
 		$lastName = $request ->lastName;

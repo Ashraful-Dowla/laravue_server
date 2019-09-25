@@ -25,7 +25,7 @@ class TestManagement extends FormRequest
     {
         return [
             'name' => 'required',
-            'test_price' => 'required',
+            'test_price' => 'required|numeric',
             'created_by' => 'required',
         ];
     }

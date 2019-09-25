@@ -18,6 +18,9 @@ class CreateBillIssuedsTable extends Migration
             $table->string('invoice_id');
             $table->string('patient_id');
             $table->string('amount');
+            $table->string('discount');
+            $table->string('amount_after_discount');
+            $table->string('due');
             $table->date('issued_date');
             $table->string('status');
             $table->timestamps();
