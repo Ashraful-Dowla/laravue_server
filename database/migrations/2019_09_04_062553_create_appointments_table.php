@@ -19,8 +19,8 @@ class CreateAppointmentsTable extends Migration
             $table->string('doctor_id');
             $table->string('department');
             $table->date('appointment_date');
-            $table->binary('status');
-            $table->time('time');
+            $table->string('status');
+            $table->string('time');
             $table->timestamps();
             $table->string('created_by')->references('id')->on('users');
             $table->string('updated_by')->references('id')->on('users');
