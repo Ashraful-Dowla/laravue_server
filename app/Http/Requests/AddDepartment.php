@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TestManagementUpdate extends FormRequest
+class AddDepartment extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class TestManagementUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'test_price' => 'required|numeric',
-            'updated_by' => 'required',
-            'update_id' => 'required',
+            //
+            'department_name' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+            'created_by' => 'required',
         ];
     }
 }

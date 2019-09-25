@@ -22,6 +22,7 @@ class Cors
                 header('Access-Control-Allow-Origin: ' . $origin);
                 header('Access-Control-Allow-Headers: Origin, Content-Type, Authorization');
             }
+
             return $next($request);
         }
         return redirect('/home');
