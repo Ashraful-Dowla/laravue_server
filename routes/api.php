@@ -30,12 +30,19 @@ Route::post('addDepartments','Department@addDepartments');
 Route::get('getDepartmentData','Department@getDepartmentData');
 Route::post('updateDepartmentData','Department@updateData');
 Route::post('deleteDepartmentData','Department@deleteData');
+Route::get('adminPrescriptionView', 'AdminPrescription@getData');
+Route::get('adminBill', 'AdminBillIssued@getData');
+Route::post('adminBillDelete', 'AdminBillIssued@deleteData');
 
 
 /*=======================================================================*/
 
 
 /*============================Doctor======================================*/
+
+Route::post('addPrescription','DoctorPrescription@insertData');
+Route::get('previousRecords/{patient_id}/{selected}','PatientPreviousRecords@getData');
+Route::get('docPatientReportData/{id}','PatientPreviousRecords@getReportData');
 
 
 /*========================================================================*/
@@ -51,6 +58,15 @@ Route::get('patient_previous_appointments/{patient_id}','PatientAppoinmentContro
 Route::get('patient_visit_history/{patient_id}','visit_history@patient_visit_history');
 Route::get('prescription_view/{patient_id}','Patient_Prescription_View@prescription_view');
 Route::post('getPrescription','Patient_Prescription_View@getPrescription');
+
+Route::get('getPatientTestIssuedData/{id}', 'PatientTestIssued@getData');
+
+Route::get('getPatientBillIssuedData/{id}','PatientBillIssued@getData');
+
+Route::get('getPatientBillIssuedDataPdf/{id}','PatientBillIssued@getDataPdf');
+
+Route::get('getReport/{id}','PatientReport@getData');
+Route::get('getReportData/{id}','PatientReport@uploadedData');
 
 /*========================================================================*/
 
@@ -70,6 +86,15 @@ Route::post('getOrdersData','ReceptionistOrders@getData');
 Route::get('getDataUpdateTestIssue/{id}', 'ReceptionistUpdateTestIssue@getData');
 
 Route::post('UpdateTestIssue', 'ReceptionistUpdateTestIssue@updateData');
+
+Route::post('myWalletRecharge', 'MyWalletRecharge@recharge');
+
+Route::get('getProceedToPaymentData/{bill_id}','ProceedToPayment@getData');
+Route::post('paymentDataInsert','ProceedToPayment@insertData');
+
+Route::get('getTransactionData/{user_id}', 'Transaction@getData');
+
+Route::post('recReportUpload','ReceptionistReportUpload@insertData');
 /*========================================================================*/
 
 /*============================ Other =====================================*/
