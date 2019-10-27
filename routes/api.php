@@ -30,6 +30,9 @@ Route::post('addDepartments','Department@addDepartments');
 Route::get('getDepartmentData','Department@getDepartmentData');
 Route::post('updateDepartmentData','Department@updateData');
 Route::post('deleteDepartmentData','Department@deleteData');
+Route::get('adminPrescriptionView', 'AdminPrescription@getData');
+Route::get('adminBill', 'AdminBillIssued@getData');
+Route::post('adminBillDelete', 'AdminBillIssued@deleteData');
 
 			/*******************************/
 Route::post('registerDoctor','RegisterDoctor@registerDoctor');
@@ -83,6 +86,10 @@ Route::post('updateDoctorEduData','doctorProfileController@updateDoctorEduData')
 Route::post('updateDoctorExpData','doctorProfileController@updateDoctorExpData');
 Route::post('updateDoctorGeneralData','doctorProfileController@updateDoctorGeneralData');
 
+Route::post('addPrescription','DoctorPrescription@insertData');
+Route::get('previousRecords/{patient_id}/{selected}','PatientPreviousRecords@getData');
+Route::get('docPatientReportData/{id}','PatientPreviousRecords@getReportData');
+
 
 /*========================================================================*/
 
@@ -99,6 +106,15 @@ Route::get('prescription_view/{patient_id}','Patient_Prescription_View@prescript
 Route::post('getPrescription','Patient_Prescription_View@getPrescription');
 Route::post('getPatinetInfoForDashboard','PatientDashboardController@getPatinetInfoForDashboard');
 Route::post('savePatientProfilePicture','PatientDashboardController@savePatientProfilePicture');
+
+Route::get('getPatientTestIssuedData/{id}', 'PatientTestIssued@getData');
+
+Route::get('getPatientBillIssuedData/{id}','PatientBillIssued@getData');
+
+Route::get('getPatientBillIssuedDataPdf/{id}','PatientBillIssued@getDataPdf');
+
+Route::get('getReport/{id}','PatientReport@getData');
+Route::get('getReportData/{id}','PatientReport@uploadedData');
 
 /*========================================================================*/
 
@@ -119,8 +135,19 @@ Route::get('getDataUpdateTestIssue/{id}', 'ReceptionistUpdateTestIssue@getData')
 
 Route::post('UpdateTestIssue', 'ReceptionistUpdateTestIssue@updateData');
 
+
 Route::post('getReceptionistInfo','receptionist_info@getReceptionistInfo');
 Route::post('updateReceptionistGeneralInfo','receptionist_info@updateReceptionistGeneralInfo');
+
+Route::post('myWalletRecharge', 'MyWalletRecharge@recharge');
+
+Route::get('getProceedToPaymentData/{bill_id}','ProceedToPayment@getData');
+Route::post('paymentDataInsert','ProceedToPayment@insertData');
+
+Route::get('getTransactionData/{user_id}', 'Transaction@getData');
+
+Route::post('recReportUpload','ReceptionistReportUpload@insertData');
+
 /*========================================================================*/
 
 /*============================ Other =====================================*/

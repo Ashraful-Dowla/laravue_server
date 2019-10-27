@@ -13,10 +13,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         	
-     //    $users = [
-     //        [
-     //            'first_name' => 'Ajmal','last_name' => 'Hossain','email' => 'admin@gmail.com','password' => bcrypt('admin'),'username' => 'ajmal123','joining_date' => '2019-08-20','birthday' => '2019-08-20','nid_no' => '879658554','nid_image' => '1011','gender' => 'male','address' => 'sitakund,ctg','country' => 'Bangladesh','city' => 'Chittagong','state' => 'sitakund','postal_code' => '4310','phone_number' => '852741','image' => '1110','department' => 'Cadiology','short_biography' => 'Ajmal Hossain Opu. adjhd','status' => '1','doctor_id' => 'DR-3','patient_id' => 'PT-3','receptionist_id' => 'RC-3','admin_id' => 'AD-3','role' => '1','created_by' => '','updated_by' => ''
-     //        ],
+        $users = [
+            [
+                'first_name' => 'Ajmal','last_name' => 'Hossain','email' => 'admin@gmail.com','password' => bcrypt('admin'),'username' => 'ajmal123','joining_date' => '2019-08-20','birthday' => '2019-08-20','nid_no' => '879658554','nid_image' => '1011','gender' => 'male','address' => 'sitakund,ctg','country' => 'Bangladesh','city' => 'Chittagong','state' => 'sitakund','postal_code' => '4310','phone_number' => '852741','image' => '1110','department' => 'Cadiology','short_biography' => 'Ajmal Hossain Opu. adjhd','status' => '1','doctor_id' => 'DR-3','patient_id' => 'PT-3','receptionist_id' => 'RC-3','admin_id' => 'AD-3','role' => '1','created_by' => '','updated_by' => ''
+            ]
+        ];
      //        [
      //            'first_name' => 'Ajmal','last_name' => 'Hossain','email' => 'doctor@gmail.com','password' => bcrypt('doctor'),'username' => 'ajmal123','joining_date' => '2019-08-20','birthday' => '2019-08-20','nid_no' => '879658554','nid_image' => '1011','gender' => 'male','address' => 'sitakund,ctg','country' => 'Bangladesh','city' => 'Chittagong','state' => 'sitakund','postal_code' => '4310','phone_number' => '852741','image' => '1110','department' => 'Cadiology','short_biography' => 'Ajmal Hossain Opu. adjhd','status' => '1','doctor_id' => 'DR-3','patient_id' => 'PT-3','receptionist_id' => 'RC-3','admin_id' => 'AD-3','role' => '2','created_by' => '','updated_by' => ''
      //        ],
@@ -96,11 +97,13 @@ class UsersTableSeeder extends Seeder
         //     ['patient_id' => 'PT-416665407392019','patient_name' => 'Ashrafur Dowla','doctor_id' => '2','doctor_name' => 'Ajmal Hossain','department' => 'Cardiology','issued_date' => '2019-08-12','created_at' => '2019-09-22','updated_at' => '2019-09-22','created_by' => '1','updated_by' => '1'],
         // ];
 
+
         // DB::table('visit_histories')->insert($visitHistory);
         DB::table('doctor_schedules')->insert($doc_schedule);
         // DB::table('departments')->insert($departments);
         // DB::table('users')->insert($users);
         // DB::table('prescriptions')->insert($prescription);
+
         //    DB::table('report_overviews')->insert($report_overview);
     }
 }
