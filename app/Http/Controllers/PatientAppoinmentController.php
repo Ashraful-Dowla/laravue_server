@@ -32,13 +32,23 @@ class PatientAppoinmentController extends Controller
     		return response()->json('failed',401);
     	}
     	else{
-    		$query = DB::table('users')->select('id')
+        /*=====================================================================*/
+    		$query = DB::table('users')->select('id','first_name','last_name')
     							->where('patient_id',$patient_id)
-    							->first();
-	    	$by = $query->id;
+    							->get();
+	    	$by = $query[0]->id;
+            $PT_name_combined = $query[0]->first_name.' '.$query[0]->last_name;
+        /*=====================================================================*/
+            $doc_name = DB::table('users')
+                            ->select('first_name','last_name')
+                            ->where('id',$doctor)
+                            ->get();
+
+            $doc_name_combined = $doc_name[0]->first_name.' '.$doc_name[0]->last_name;
+        /*=====================================================================*/
 
 	    	DB::table('appointments')->insert(
-			    ['patient_id' => $patient_id,'doctor_id' => $doctor,'department' => $department,'appointment_date' => $appointment_date,'status' => 'online','time' => $appointment_time,'created_at' => $dateTime,'updated_at' => $dateTime,'created_by' => $by,'updated_by' => $by]
+			    ['patient_id' => $patient_id,'patient_name' => $PT_name_combined,'doctor_id' => $doctor,'doctor_name' => $doc_name_combined,'department' => $department,'appointment_date' => $appointment_date,'status' => 'online','time' => $appointment_time,'created_at' => $dateTime,'updated_at' => $dateTime,'created_by' => $by,'updated_by' => $by]
 			);
     	}
     }
@@ -46,14 +56,14 @@ class PatientAppoinmentController extends Controller
     	$receivedDepartment = $request->department;
     	$receivedDoctor = $request->doctor;
     	$receivedDate = $request->appointment_date;
-    	$receivedTime = $request->appointment_time;
     	$formatedDate = Carbon::parse($receivedDate);
-    	$date = new Carbon($formatedDate);
+    	$date = new Carbon($formatedDate);//new Carbon(Carbon::parse($request->appointment_date));
     	$day_name = $date->englishDayOfWeek;
     	$chk = DB::table('doctor_schedules')->select('time_from','time_to')
     										  ->where('department',$receivedDepartment)
     										  ->Where('doctor_id', $receivedDoctor)
     										  ->Where('available_days', $day_name)
+                                              ->distinct()
     										  ->get();
     	if($chk->isNotEmpty()){
 	    	return (['status' => '1','yes' => $chk]);
@@ -66,6 +76,7 @@ class PatientAppoinmentController extends Controller
     		$avlDays = DB::table('doctor_schedules')->select('available_days','time_from','time_to')
     												->where('department',$receivedDepartment)
 		    										->Where('doctor_id', $receivedDoctor)
+                                                    ->distinct()
 		    										->get();
 		    for($k=10; $k > 0; $k--){
 		    	$dateToday = date ("Y-m-d", strtotime("+1 day", strtotime($dateToday)));
@@ -95,11 +106,22 @@ class PatientAppoinmentController extends Controller
 
     public function patient_previous_appointments($id){
 		$prevAppointments = DB::table('appointments')
-		                        ->leftJoin('users', 'appointments.doctor_id', '=', 'users.id')
-		                        ->select('users.first_name','users.last_name','appointments.patient_id', 'appointments.appointment_date','appointments.status')
-		                        ->where('appointments.patient_id',$id)
-		                        ->orderBy('appointments.appointment_date','desc')
+		                        ->select('doctor_name','appointment_date','status')
+		                        ->where('patient_id',$id)
+		                        ->orderBy('appointment_date','desc')
                 				->paginate(5);
         return response()->json($prevAppointments);
+    }
+    public function getAppointmentsInfo(){
+        $Appointments = DB::table('appointments')
+                                ->select('id','patient_name','doctor_name','department','appointment_date','status','time')
+                                ->orderBy('appointment_date','desc')
+                                ->paginate(5);
+        return response()->json($Appointments);
+    }
+    public function deleteAppointment(Request $request){
+        DB::table('appointments')
+                ->where('id',$request->apt_id)
+                ->delete();
     }
 }

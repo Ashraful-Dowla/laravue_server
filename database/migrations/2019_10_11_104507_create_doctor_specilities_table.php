@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReportOverviewsTable extends Migration
+class CreateDoctorSpecilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateReportOverviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_overviews', function (Blueprint $table) {
+        Schema::create('doctor_specilities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('patient_id');
-            $table->string('patient_name');
             $table->string('doctor_id');
-            $table->string('doctor_name');
-            $table->string('department');
-            $table->string('issued_date');
-            $table->binary('report')->nullable();
+            $table->string('speciality');
             $table->timestamps();
             $table->string('created_by')->references('id')->on('users');
             $table->string('updated_by')->references('id')->on('users');
@@ -35,6 +30,6 @@ class CreateReportOverviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_overviews');
+        Schema::dropIfExists('doctor_specilities');
     }
 }

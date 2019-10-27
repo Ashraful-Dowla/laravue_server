@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class leave_management extends Model
+class leave_type extends Model
 {
     //
 }
