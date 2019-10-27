@@ -33,7 +33,7 @@ class AuthenticationController extends Controller
 		$postalCode = $request ->postalCode;
 		$phoneNumber = $request ->phoneNumber;
 		$nid_no = $request ->nid_no;
-		$nid_image = $request->nid_image;
+		$nid_image = 'nid_image';
 		$status = $request ->status;
 		$date = Carbon::now()->toDateTimeString();
 		$randomString = Str::random(32);
@@ -49,9 +49,32 @@ class AuthenticationController extends Controller
 		$lastID = DB::getPdo()->lastInsertId();
 		$year = Carbon::now()->year;
 		$patient_id = "PT-" . $lastID . rand() . $year;
-		DB::table('users')
+
+		/*============================NID Image Manipulation==========================*/
+			$exploded = explode(',', $request->nid_image);
+			$decoded = base64_decode($exploded[1]);
+			if(strpos($exploded[0], 'jpeg')){
+				$extention = 'jpg';
+			}
+			else{
+				$extention = 'png';
+			}
+			$filename = $lastID.'_NID'.'.'.$extention;
+			$folder = 'patientNidImageFolder';
+			$path = public_path().'/'.$folder.'/'.$filename;
+			file_put_contents($path, $decoded);
+		/*============================================================================*/
+
+		if($request->id === null){
+			DB::table('users')
               ->where('id', $lastID)
               ->update(['patient_id' => $patient_id,'created_by' => $lastID,'updated_by' => $lastID]);
+		}
+		else{
+			DB::table('users')
+              ->where('id', $lastID)
+              ->update(['patient_id' => $patient_id,'nid_image' => $filename,'created_by' => $request->id,'updated_by' => $request->id]);
+		}
     }
     public function crosscheck (Request $request) {
     	$token = $request->token;
@@ -73,5 +96,10 @@ class AuthenticationController extends Controller
         else{
             return (['crosscheck' => 'invalid']); 
         }
+    }
+    public function deletePatient(Request $request){
+    	DB::table('users')
+    			->where('id',$request->rowID)
+    			->delete();
     }
 }

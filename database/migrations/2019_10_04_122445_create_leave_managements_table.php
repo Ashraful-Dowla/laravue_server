@@ -22,6 +22,7 @@ class CreateLeaveManagementsTable extends Migration
             $table->date('date_to');
             $table->integer('number_of_days');
             $table->string('leave_reason');
+            $table->binary('status');
             $table->timestamps();
             $table->string('created_by')->references('id')->on('users');
             $table->string('updated_by')->references('id')->on('users');

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('joining_date');
             $table->date('birthday');
             $table->string('nid_no');
-            $table->binary('nid_image');
+            $table->string('nid_image');
             $table->string('gender',10);
             $table->string('address');
             $table->string('country',50);
@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('state',50);
             $table->string('postal_code',20);
             $table->string('phone_number',20);
-            $table->binary('image')->nullable();
+            $table->string('image')->nullable();
             $table->string('department',20)->nullable();
             $table->string('short_biography')->nullable();
             $table->binary('status');
