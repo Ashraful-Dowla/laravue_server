@@ -17,7 +17,16 @@ class ReceptionistReportUpload extends Controller
 
         $data = DB::table('report_overviews')->latest()->first();
 
-        $filename = "P_".$request->patient_id."_R_".($data->id+1)."_".$request->report_name;
+        $tag_id = '';
+
+        if($data){
+            //return response()->json(['message'=>'yes']);
+            $tag_id = $data->id;
+        }else{
+            $tag_id = 0;
+        }   
+
+        $filename = "P_".$request->patient_id."_R_".($tag_id+1)."_".$request->report_name;
 
         $path = public_path() . "/uploads/" .$filename;
         file_put_contents($path, $request->reportUrl);
