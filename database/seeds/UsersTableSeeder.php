@@ -99,9 +99,9 @@ class UsersTableSeeder extends Seeder
 
 
         // DB::table('visit_histories')->insert($visitHistory);
-        DB::table('doctor_schedules')->insert($doc_schedule);
+        //DB::table('doctor_schedules')->insert($doc_schedule);
         // DB::table('departments')->insert($departments);
-        // DB::table('users')->insert($users);
+         DB::table('users')->insert($users);
         // DB::table('prescriptions')->insert($prescription);
 
         //    DB::table('report_overviews')->insert($report_overview);

@@ -78,4 +78,23 @@ class MyWalletRecharge extends Controller
        ]);
 
     }
+
+    public function walletData($id)
+    {
+        $chk = DB::table('wallet_recharges')
+                 ->where('user_id',$id)
+                 ->exists();
+
+        if(!$chk)
+        {
+            return response()->json(['message' => 'No wallet account'],401);
+        }
+
+        $data = DB::table('wallet_recharges')
+                  ->select('total_amount')
+                  ->where('user_id',$id)
+                  ->first();
+
+        return response()->json($data);
+    }
 }
