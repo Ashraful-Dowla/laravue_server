@@ -97,8 +97,9 @@ class DoctorScheduleController extends Controller
     			->delete();
     }
     public function updateSingleScheduleInfo(Request $request){
-    	$time_from = $request->time_from['hh'].':'.$request->time_from['mm'];
-    	$time_to = $request->time_to['hh'].':'.$request->time_to['mm'];
+        // return $request->time_from;
+    	$time_from = $request->time_from['HH'].':'.$request->time_from['mm'];
+    	$time_to = $request->time_to['HH'].':'.$request->time_to['mm'];
 
     	DB::table('doctor_schedules')
     			->where('id',$request->id)

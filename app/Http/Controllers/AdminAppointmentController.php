@@ -24,7 +24,7 @@ class AdminAppointmentController extends Controller
 					    				->where('appointment_date',$appointment_date)
 					    				->get();
 
-    	if($chk->isNotEmpty()){
+    	if($chk->count()){
     		return response()->json('failed',401);
     	}
     	else{

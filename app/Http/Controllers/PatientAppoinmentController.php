@@ -59,20 +59,29 @@ class PatientAppoinmentController extends Controller
     	$formatedDate = Carbon::parse($receivedDate);
     	$date = new Carbon($formatedDate);//new Carbon(Carbon::parse($request->appointment_date));
     	$day_name = $date->englishDayOfWeek;
+        $onlyDate = $formatedDate->toDateString();
+
     	$chk = DB::table('doctor_schedules')->select('time_from','time_to')
     										  ->where('department',$receivedDepartment)
     										  ->Where('doctor_id', $receivedDoctor)
     										  ->Where('available_days', $day_name)
                                               ->distinct()
     										  ->get();
-    	if($chk->isNotEmpty()){
+
+        $count = DB::table('appointments')->select('id')
+                                          ->where('department',$receivedDepartment)
+                                          ->where('doctor_id',$receivedDoctor)
+                                          ->where('appointment_date',$onlyDate)
+                                          ->count();
+
+    	if($chk->isNotEmpty() && $count <= 5){
 	    	return (['status' => '1','yes' => $chk]);
     	}
     	else{
     		$datesAvailable = [];
     		$timesFromAvailable = [];
     		$timesToAvailable = [];
-    		$dateToday = Carbon::now()->toDateString();
+    		$dateToday = /*Carbon::now()->toDateString();*/$onlyDate;
     		$avlDays = DB::table('doctor_schedules')->select('available_days','time_from','time_to')
     												->where('department',$receivedDepartment)
 		    										->Where('doctor_id', $receivedDoctor)
@@ -90,7 +99,7 @@ class PatientAppoinmentController extends Controller
 		    	}
 		    }
 		    $len = sizeof($avlDays);
-		    for($i = 0; $i<=$len; $i++){
+		    for($i = 0; $i < $len; $i++){
 		    	$collection[] = collect([
 			    	[
 			    		'date' => $datesAvailable[$i],
