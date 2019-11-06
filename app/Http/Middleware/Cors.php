@@ -15,7 +15,7 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        $domain = ['http://localhost:8080'];
+        $domain = ['http://localhost:8081'];
         if(isset($request->server()['HTTP_ORIGIN'])){
             $origin = $request->server()['HTTP_ORIGIN'];
             if(in_array($origin, $domain)){

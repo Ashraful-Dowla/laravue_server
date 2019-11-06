@@ -75,4 +75,11 @@ class doctorProfileController extends Controller
     			->where('id',$request->doctor_id)
     			->update(['phone_number' => $request->phone, 'email' => $request->email, 'address' => $request->address]);
     }
+    public function getDoctorImageForDropdown(Request $request){
+        $image = DB::table('users')
+               ->select('image')
+               ->where('id',$request->id)
+               ->get();
+        return response()->json($image);
+    }
 }

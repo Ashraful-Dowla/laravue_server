@@ -38,4 +38,11 @@ class PatientDashboardController extends Controller
     	$patientPic->image = $filename;
     	$patientPic->save();
     }
+    public function getPatientImageForDropdown(Request $request){
+        $img = DB::table('users')
+                      ->select('image')
+                      ->where('id',$request->id)
+                      ->get();
+        return response()->json($img);
+    }
 }

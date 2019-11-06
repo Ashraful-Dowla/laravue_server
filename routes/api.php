@@ -88,6 +88,7 @@ Route::post('saveDoctorSpecility','doctorProfileController@saveDoctorSpecility')
 Route::post('updateDoctorEduData','doctorProfileController@updateDoctorEduData');
 Route::post('updateDoctorExpData','doctorProfileController@updateDoctorExpData');
 Route::post('updateDoctorGeneralData','doctorProfileController@updateDoctorGeneralData');
+Route::post('getDoctorImageForDropdown','doctorProfileController@getDoctorImageForDropdown');
 
 Route::post('addPrescription','DoctorPrescription@insertData');
 Route::get('previousRecords/{patient_id}/{selected}','PatientPreviousRecords@getData');
@@ -109,6 +110,7 @@ Route::get('prescription_view/{patient_id}','Patient_Prescription_View@prescript
 Route::post('getPrescription','Patient_Prescription_View@getPrescription');
 Route::post('getPatinetInfoForDashboard','PatientDashboardController@getPatinetInfoForDashboard');
 Route::post('savePatientProfilePicture','PatientDashboardController@savePatientProfilePicture');
+Route::post('getPatientImageForDropdown','PatientDashboardController@getPatientImageForDropdown');
 
 Route::get('getPatientTestIssuedData/{id}', 'PatientTestIssued@getData');
 
@@ -142,6 +144,7 @@ Route::post('UpdateTestIssue', 'ReceptionistUpdateTestIssue@updateData');
 
 Route::post('getReceptionistInfo','receptionist_info@getReceptionistInfo');
 Route::post('updateReceptionistGeneralInfo','receptionist_info@updateReceptionistGeneralInfo');
+Route::post('getReceptionistImageForDropdown','receptionist_info@getReceptionistImageForDropdown');
 
 Route::post('myWalletRecharge', 'MyWalletRecharge@recharge');
 
