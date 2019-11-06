@@ -123,4 +123,11 @@ class receptionist_info extends Controller
                 ->where('id',$request->rowID)
                 ->update(['email' => $request->email,'address' => $request->address,'phone_number' => $request->phone,'updated_at' => $dateTime,'updated_by' => $request->rowID]);
     }
+    public function getReceptionistImageForDropdown(Request $request){
+        $img = DB::table('users')
+                      ->select('image')
+                      ->where('id',$request->id)
+                      ->get();
+        return response()->json($img);
+    }
 }
