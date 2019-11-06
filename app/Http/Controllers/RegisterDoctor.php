@@ -87,6 +87,12 @@ class RegisterDoctor extends Controller
     	DB::table('users')
     			->where('id',$request->dr_id)
     			->delete();
+    	DB::table('appointments')
+    			->where('doctor_id',$request->dr_id)
+    			->delete();
+    	DB::table('doctor_schedules')
+    			->where('doctor_id',$request->dr_id)
+    			->delete();
     }
     public function editDoctor(Request $request){
     	$date = Carbon::now();

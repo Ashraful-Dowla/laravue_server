@@ -80,7 +80,7 @@ class receptionist_info extends Controller
     }
     public function receptionistList() {
     	$receptionistList = DB::table('users')
-    								->select('id','first_name','phone_number')
+    								->select('id','first_name','last_name','phone_number')
     								->where('role',3)
     								->paginate(5);
     	return response()->json($receptionistList);

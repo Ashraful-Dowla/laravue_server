@@ -118,7 +118,8 @@ class OtherController extends Controller
         $info = DB::table('leave_managements')
                         ->leftJoin('users','leave_managements.doctor_id','=','users.doctor_id')
                         ->select('users.first_name','users.last_name','leave_managements.id','leave_managements.request_type','leave_managements.department_name','leave_managements.date_from','leave_managements.date_to','leave_managements.number_of_days','leave_managements.leave_reason','leave_managements.status')
-                        ->where('leave_managements.status',0)
+                        // ->where('leave_managements.status',0)
+                        // ->where('leave_managements.status',1)
                         ->paginate(5);
         return response()->json($info);
     }

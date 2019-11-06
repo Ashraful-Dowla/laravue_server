@@ -55,6 +55,7 @@ Route::post('deleteAppointment','PatientAppoinmentController@deleteAppointment')
 Route::post('initiateAppointmentsInfo','PatientAppointmentEditController@initiateAppointmentsInfo');
 Route::post('edit_appointment','PatientAppointmentEditController@edit_appointment');
 Route::post('admin_book_appointment','AdminAppointmentController@admin_book_appointment');
+Route::post('Limit_crossed_next_dates','AdminAppointmentController@Limit_crossed_next_dates');
 			/*******************************/
 Route::get('getDoctorScheduleInfo','DoctorScheduleController@getDoctorScheduleInfo');
 Route::post('deleteDoctorSchedule','DoctorScheduleController@deleteDoctorSchedule');
