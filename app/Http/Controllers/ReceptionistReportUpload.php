@@ -16,7 +16,6 @@ class ReceptionistReportUpload extends Controller
     	$time = Carbon::now()->toDateTimeString();
 
         $data = DB::table('report_overviews')->latest()->first();
-        // return $data;
         if($data === null){
             $filename = "P_".$request->patient_id."_R_".'1'."_".$request->report_name;
         }

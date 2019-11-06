@@ -67,6 +67,8 @@ Route::post('updateSingleScheduleInfo','DoctorScheduleController@updateSingleSch
 			/******************************/
 Route::get('getInfoForAdminDashboard','AdminDashboardController@getInfoForAdminDashboard');
 
+Route::get('adminReportView','AdminReport@getData');
+
 
 /*=======================================================================*/
 
@@ -116,6 +118,7 @@ Route::get('getPatientBillIssuedDataPdf/{id}','PatientBillIssued@getDataPdf');
 
 Route::get('getReport/{id}','PatientReport@getData');
 Route::get('getReportData/{id}','PatientReport@uploadedData');
+Route::get('getWalletData/{id}','MyWalletRecharge@walletData');
 
 /*========================================================================*/
 

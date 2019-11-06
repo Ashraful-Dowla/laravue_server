@@ -29,6 +29,10 @@ class ProceedToPayment extends Controller
 		    	 ->where('id', $request->bill_id)
 		    	 ->first();
 
+		if($data->due < $request->paid){
+			return response()->json(['message' => 'Error!'],401);
+		}
+
 		$chk = DB::table('wallet_recharges')
     			 ->where('user_id', $data->patient_id)
     			 ->exists();
