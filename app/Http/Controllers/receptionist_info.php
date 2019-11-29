@@ -46,7 +46,7 @@ class receptionist_info extends Controller
 
 		$lastID = DB::getPdo()->lastInsertId();
 		$year = Carbon::now()->year;
-		$receptionist_id = "REC-" . $lastID . rand() . $year;
+		$receptionist_id = $lastID;
         /*========================================================================*/
         $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);

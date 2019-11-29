@@ -17,7 +17,9 @@ Route::post('crosscheck','AuthenticationController@crosscheck');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+/*============================Password Reset======================================*/
+Route::post('sendPasswordResetLink','AuthenticationController@sendPasswordResetLink');
+Route::post('resetPassword','AuthenticationController@resetPassword');
 /*============================Admin======================================*/
 
 Route::post('testManagement','ApiTestManagement@insertTestData');

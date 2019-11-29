@@ -96,7 +96,7 @@ class DoctorAppointmentComtroller extends Controller
     	$info = DB::table('appointments')
     					->select('patient_id')
     					->where('doctor_id',$id)
-    					->where('appointment_date','=',Carbon::now()->toDateString())
+    					->where('appointment_date',Carbon::now()->toDateString())
     					->get();
     	return response()->json(['pat_info' => $info]);
     }

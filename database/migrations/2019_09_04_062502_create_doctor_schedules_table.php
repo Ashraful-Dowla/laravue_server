@@ -15,15 +15,25 @@ class CreateDoctorSchedulesTable extends Migration
     {
         Schema::create('doctor_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('doctor_id');
+            $table->unsignedbigInteger('doctor_id');
+            $table->foreign('doctor_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->string('department');
             $table->string('available_days');
             $table->time('time_from');
             $table->time('time_to');
             $table->binary('status');
+            $table->unsignedbigInteger('created_by');
+            $table->foreign('created_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->unsignedbigInteger('updated_by');
+            $table->foreign('updated_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
-            $table->string('created_by')->references('id')->on('users');
-            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

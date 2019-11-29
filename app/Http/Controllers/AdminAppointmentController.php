@@ -21,10 +21,10 @@ class AdminAppointmentController extends Controller
     	$chk = DB::table('appointments')->select('id')
 					    				->where('patient_id',$patient_id)
 					    				->where('doctor_id',$doctor)
-					    				->where('appointment_date',$appointment_date)
+					    				->where('appointment_date',$appointment_date->toDateString())
 					    				->get();
 
-    	if($chk->count()){
+    	if($chk->isNotEmpty()){
     		return response()->json('failed',401);
     	}
     	else{

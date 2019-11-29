@@ -9,9 +9,31 @@ use Carbon\Carbon;
 use Mail;
 use App\Mail\GmailExam;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
+	public function sendPasswordResetLink(Request $request){
+		$email = $request->email;
+        Mail::raw('echo"<a href="http://localhost:8080/resetPassword/'.$email.'">Click Here</a>"', function ($message) use ($email){
+		    $message->to($email);
+		});
+    }
+    public function resetPassword(Request $request){
+    	$chk = DB::table('users')
+    				->select('password')
+    				->where('email',$request->email)
+    				->first();
+
+    	if (Hash::check($request->oldPassword, $chk->password, [])) {
+			DB::table('users')
+					->where('email',$request->email)
+					->update(['password' => bcrypt($request->newPassword)]);
+		}
+		else{
+			return response()->json('Incorrect password',401);
+		}
+    }
     public function patientAdmission(patient_registration $request){
 
     	$validated = $request->validated();
@@ -48,7 +70,7 @@ class AuthenticationController extends Controller
 
 		$lastID = DB::getPdo()->lastInsertId();
 		$year = Carbon::now()->year;
-		$patient_id = "PT-" . $lastID . rand() . $year;
+		$patient_id = $lastID;
 
 		/*============================NID Image Manipulation==========================*/
 			$exploded = explode(',', $request->nid_image);

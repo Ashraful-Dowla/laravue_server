@@ -15,13 +15,23 @@ class CreateRefillAccountsTable extends Migration
     {
         Schema::create('refill_accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('patient_id');
+            $table->unsignedbigInteger('patient_id');
+            $table->foreign('patient_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->string('amount');
             $table->date('refill_date');
             $table->string('receipt_no');
+            $table->unsignedbigInteger('created_by');
+            $table->foreign('created_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->unsignedbigInteger('updated_by');
+            $table->foreign('updated_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
-            $table->string('created_by')->references('id')->on('users');
-            $table->string('updated_by')->references('id')->on('users');
         });
     }
 
