@@ -15,13 +15,25 @@ class CreatePaymentSectionsTable extends Migration
     {
         Schema::create('payment_sections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('bill_id')->references('id')->on('bill_issueds');
+
+            $table->unsignedbigInteger('bill_id');
+            $table->foreign('bill_id')
+                              ->references('id')->on('bill_issueds')
+                              ->onDelete('cascade');
+
             $table->string('paid');
             $table->string('mark');
             $table->string('card_number')->nullable();
+            $table->unsignedbigInteger('created_by');
+            $table->foreign('created_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->unsignedbigInteger('updated_by');
+            $table->foreign('updated_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
-            $table->string('created_by')->references('id')->on('users');
-            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

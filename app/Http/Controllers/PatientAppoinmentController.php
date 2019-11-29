@@ -25,8 +25,9 @@ class PatientAppoinmentController extends Controller
     	$chk = DB::table('appointments')->select('id')
 					    				->where('patient_id',$patient_id)
 					    				->where('doctor_id',$doctor)
-					    				->where('appointment_date',$appointment_date)
+					    				->where('appointment_date',$appointment_date->toDateString())
 					    				->get();
+                                        // return $appointment_date->();
 
     	if($chk->isNotEmpty()){
     		return response()->json('failed',401);
@@ -74,13 +75,14 @@ class PatientAppoinmentController extends Controller
                                           ->where('appointment_date',$onlyDate)
                                           ->count();
 
-    	if($chk->isNotEmpty() && $count <= 5){
+    	if($chk->isNotEmpty() && $count <= 2){
 	    	return (['status' => '1','yes' => $chk]);
     	}
     	else{
     		$datesAvailable = [];
     		$timesFromAvailable = [];
     		$timesToAvailable = [];
+            $collection = [];
     		$dateToday = /*Carbon::now()->toDateString();*/$onlyDate;
     		$avlDays = DB::table('doctor_schedules')->select('available_days','time_from','time_to')
     												->where('department',$receivedDepartment)

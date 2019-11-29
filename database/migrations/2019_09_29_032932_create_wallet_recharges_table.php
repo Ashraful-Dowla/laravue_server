@@ -15,12 +15,23 @@ class CreateWalletRechargesTable extends Migration
     {
         Schema::create('wallet_recharges', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id')->references('id')->on('users');
+            $table->unsignedbigInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
             $table->string('recharge_amount');
             $table->string('total_amount');
+            $table->unsignedbigInteger('created_by');
+            $table->foreign('created_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->unsignedbigInteger('updated_by');
+            $table->foreign('updated_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
-            $table->string('created_by')->references('id')->on('users');
-            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

@@ -78,7 +78,7 @@ class RegisterDoctor extends Controller
 
     	
 		$year = Carbon::now()->year;
-		$doctor_id = "DR-" . $lastID . rand() . $year;
+		$doctor_id = $lastID;
 		DB::table('users')
               ->where('id', $lastID)
               ->update(['doctor_id' => $doctor_id,'image' => $filenameImg,'nid_image' => $filenameNID,'created_by' => $request->AD_id,'updated_by' => $request->AD_id]);

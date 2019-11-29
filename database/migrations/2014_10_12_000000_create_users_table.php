@@ -42,9 +42,16 @@ class CreateUsersTable extends Migration
             $table->string('role',10);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->unsignedbigInteger('created_by')->nullable();
+            $table->foreign('created_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->unsignedbigInteger('updated_by')->nullable();
+            $table->foreign('updated_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
-            $table->string('created_by')->references('id')->on('users');
-            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

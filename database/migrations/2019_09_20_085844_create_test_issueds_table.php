@@ -15,14 +15,32 @@ class CreateTestIssuedsTable extends Migration
     {
         Schema::create('test_issueds', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('bill_id')->references('id')->on('bill_issueds');
+
+            $table->unsignedbigInteger('bill_id');
+            $table->foreign('bill_id')
+                  ->references('id')->on('bill_issueds')
+                  ->onDelete('cascade');
+
             $table->string('test_name');
             $table->string('price');
-            $table->string('patient_id')->references('id')->on('users');
-            $table->string('doctor_id')->references('id')->on('users');
+            $table->unsignedbigInteger('patient_id');
+            $table->foreign('patient_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+            $table->unsignedbigInteger('doctor_id');
+            $table->foreign('doctor_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+            $table->unsignedbigInteger('created_by');
+            $table->foreign('created_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->unsignedbigInteger('updated_by');
+            $table->foreign('updated_by')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
-            $table->string('created_by')->references('id')->on('users');
-            $table->string('updated_by')->references('id')->on('users');
         });
     }
 

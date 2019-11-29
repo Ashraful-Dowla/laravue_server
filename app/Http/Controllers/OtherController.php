@@ -102,8 +102,9 @@ class OtherController extends Controller
         $chk = DB::table('leave_managements')
                     ->where('department_name',$request->department)
                     ->where('doctor_id',$request->doctor_id)
-                    ->exists();
-        if($chk){
+                    ->where('status',0)
+                    ->get();
+        if($chk->isNotEmpty()){
             return response()->json('failed',401);
         }
         else{
@@ -111,7 +112,7 @@ class OtherController extends Controller
             $date_from = Carbon::parse($request->time_from);
             $date_to = Carbon::parse($request->time_to);
             DB::table('leave_managements')
-                    ->insert(['request_type' => $request->leave_type,'department_name' => $request->department,'doctor_id' => $request->doctor_id,'date_from' => $date_from,'date_to' => $date_to,'number_of_days' => $request->number_of_days,'leave_reason' => $request->leave_reason,'status' => 1,'created_at' => $date,'updated_at' => $date,'created_by' => $request->AD_id,'updated_by' => $request->AD_id]);
+                    ->insert(['request_type' => $request->leave_type,'department_name' => $request->department,'doctor_id' => $request->doctor_id,'date_from' => $date_from,'date_to' => $date_to,'number_of_days' => $request->number_of_days,'leave_reason' => $request->leave_reason,'status' => 0,'created_at' => $date,'updated_at' => $date,'created_by' => $request->AD_id,'updated_by' => $request->AD_id]);
         }
     }
     public function getLeaveRequests(){
@@ -131,7 +132,7 @@ class OtherController extends Controller
     public function denyLeaveRequest(Request $request){
         DB::table('leave_managements')
                 ->where('id',$request->id)
-                ->update(['status'=>2]);
+                ->update(['status'=>0]);
     }
     public function getDepartmentwiseDoctorInfo($dept_name){
         $info = DB::table('users')
