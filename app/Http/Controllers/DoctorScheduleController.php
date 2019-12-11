@@ -71,8 +71,11 @@ class DoctorScheduleController extends Controller
     	}
     	else{
     		$date = Carbon::now();
-	    	$time_from = $request->time_from['HH'].':'.$request->time_from['mm'];
-	    	$time_to = $request->time_to['HH'].':'.$request->time_to['mm'];
+            // return $request->time_to;
+	    	$time_from = $request->time_from['hh'].':'.$request->time_from['mm'].' '.$request->time_from['A'];
+            // return $time_from;
+	    	$time_to = $request->time_to['hh'].':'.$request->time_to['mm'].' '.$request->time_to['A'];
+            // return $time_from;
 	    	DB::table('doctor_schedules')
 	    			->insert(['doctor_id' => $request->doctor,'department' => $request->department,'available_days' => $request->day,'time_from' => $time_from,'time_to' => $time_to,'status' => $request->status,'created_at' => $date,'updated_at' => $date,'created_by' => $request->AD_id,'updated_by' => $request->AD_id]);
     	}
@@ -98,8 +101,8 @@ class DoctorScheduleController extends Controller
     }
     public function updateSingleScheduleInfo(Request $request){
         // return $request->time_from;
-    	$time_from = $request->time_from['HH'].':'.$request->time_from['mm'];
-    	$time_to = $request->time_to['HH'].':'.$request->time_to['mm'];
+    	$time_from = $request->time_from['hh'].':'.$request->time_from['mm'].' '.$request->time_from['A'];
+    	$time_to = $request->time_to['hh'].':'.$request->time_to['mm'].' '.$request->time_to['A'];
 
     	DB::table('doctor_schedules')
     			->where('id',$request->id)

@@ -93,6 +93,8 @@ Route::post('updateDoctorGeneralData','doctorProfileController@updateDoctorGener
 Route::post('getDoctorImageForDropdown','doctorProfileController@getDoctorImageForDropdown');
 
 Route::post('addPrescription','DoctorPrescription@insertData');
+Route::post('saveAppointmentInfo','DoctorPrescription@saveAppointmentInfo');
+Route::post('getPrescriptionInfo','DoctorPrescription@getPrescriptionInfo');
 Route::get('previousRecords/{patient_id}/{selected}','PatientPreviousRecords@getData');
 Route::get('docPatientReportData/{id}','PatientPreviousRecords@getReportData');
 

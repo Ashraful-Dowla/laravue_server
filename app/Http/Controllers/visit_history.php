@@ -9,9 +9,9 @@ class visit_history extends Controller
 {
     public function patient_visit_history($id){
 
-    	$visitHistory = DB::table('visit_histories')
+    	$visitHistory = DB::table('appointments')
     						->where('patient_id',$id)
-    						->orderBy('last_visit','desc')
+    						->orderBy('appointment_date','desc')
                 			->paginate(5);
 
         return response()->json($visitHistory);

@@ -8,6 +8,7 @@ use App\Http\Requests\DepartmentUpdate;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class Department extends Controller
 {
@@ -45,7 +46,7 @@ class Department extends Controller
     public function getDepartmentData()
     {
     	$data = DB::table('departments')
-    				->orderBy('id','desc')
+    				// ->orderBy('id','desc')
                 	->paginate(5);
     	
     	return response()->json($data);
@@ -54,18 +55,25 @@ class Department extends Controller
 
     public function updateData(DepartmentUpdate $request)
     {
-    	$validated = $request->validated();
-
-        DB::table('departments')
-            ->where('id',$request->update_id)
-            ->update([
-                'department_name' => $request->department_name,
-                'description' => $request->description,
-                'status' => $request->status,
-                'updated_at' => Carbon::now()->toDateTimeString(),
-                'slug_department_name' => Str::slug($request->department_name,' '),
-                'updated_by' => $request->updated_by
-            ]);
+    	    $validated = $request->validated();
+            $chk = DB::table('departments')
+                        ->where('slug_department_name',Str::slug($request->department_name,' '))
+                        ->exists();
+            if($chk){
+                return response()->json('failed',401);
+            }
+            else{
+                DB::table('departments')
+                    ->where('id',$request->update_id)
+                    ->update([
+                        'department_name' => $request->department_name,
+                        'description' => $request->description,
+                        'status' => $request->status,
+                        'updated_at' => Carbon::now()->toDateTimeString(),
+                        'slug_department_name' => Str::slug($request->department_name,' '),
+                        'updated_by' => $request->updated_by
+                ]);
+            }
 
         return response()->json([
             'message' => 'succesfully updated'
