@@ -60,7 +60,7 @@ class AuthenticationController extends Controller
 		$date = Carbon::now()->toDateTimeString();
 		$randomString = Str::random(32);
 
-		Mail::raw('echo"<a href="http://localhost:8080/emailConfirmation/'.$email.'/'.$randomString.'">Click Here</a>"', function ($message) use ($email,$randomString){
+		Mail::raw('"<a href="http://localhost:8080/emailConfirmation/'.$email.'/'.$randomString.'">Click Here</a>"', function ($message) use ($email,$randomString){
 		    $message->to($email);
 		});
 

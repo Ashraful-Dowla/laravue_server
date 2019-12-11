@@ -46,4 +46,22 @@ class RegisterDoctorRequest extends FormRequest
             'status' => 'required'
         ];
     }
+
+    // $validator = Validator::make( $request->all(),array(
+    //         'title'       => 'required|unique:categories,title',
+    //         'banglatitle' => 'required|unique:categories,banglatitle',
+    //     ));
+    //     if($validator->fails())
+    //     {
+    //         $errors = $validator->errors();
+
+    //         return response(array(
+    //                 'error'    => true,
+    //                 'data'     => $errors,
+    //                 'message'  => 'Please fill up all necessary and valid data'
+    //             ),200);
+    //     }
+    //     $validator = Validator::make($request->all(),[
+    //         'title' => 'unique:categories,title,'.$id
+    //     ]);
 }

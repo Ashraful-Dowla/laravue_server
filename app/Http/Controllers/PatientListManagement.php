@@ -11,10 +11,11 @@ class PatientListManagement extends Controller
     public function getTodayPatientList($id){
     	$info = DB::table('appointments')
     					->leftJoin('users','users.patient_id','=','appointments.patient_id')
-    					->select('appointments.patient_id','appointments.patient_name','users.phone_number','appointments.status','appointments.doctor_id','appointments.appointment_date')
+    					->select('appointments.id','appointments.patient_id','appointments.patient_name','users.phone_number','appointments.status','appointments.doctor_id','appointments.appointment_date')
     					->where('appointments.doctor_id',$id)
     					->where('appointments.appointment_date','=',Carbon::now()->toDateString())
     					->paginate(5);
+                        // return Carbon::now()->toDateString();
     	return response()->json($info);
     }
     public function getAllPatientList($id){

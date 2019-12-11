@@ -119,6 +119,7 @@ class PatientAppoinmentController extends Controller
 		$prevAppointments = DB::table('appointments')
 		                        ->select('doctor_name','appointment_date','status')
 		                        ->where('patient_id',$id)
+                                ->where('appointment_date','<=', Carbon::now()->toDateString())
 		                        ->orderBy('appointment_date','desc')
                 				->paginate(5);
         return response()->json($prevAppointments);
